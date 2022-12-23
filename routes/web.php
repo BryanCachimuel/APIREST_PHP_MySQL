@@ -17,7 +17,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('post', PostController::class)
+Route::resource('posts', PostController::class)
     ->only(['index','store','update','destroy'])
     ->middleware(['auth']);
 
