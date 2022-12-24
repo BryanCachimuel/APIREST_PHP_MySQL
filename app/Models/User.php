@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // estableciendo la relacion uno a muchos
     public function posts(){
         return $this->hasMany(Post::class);
     }

@@ -9,6 +9,11 @@ class Post extends Model
 {
     use HasFactory;
 
+    // estableciendo la inversa de la relación establecida en User.php
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'title',
         'body'
