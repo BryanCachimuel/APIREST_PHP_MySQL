@@ -19,7 +19,17 @@ class PostController extends Controller
    
     public function store(Request $request)
     {
-        //
+        //validamos los datos ingresados en el formulario para crear el posts
+        $validate = $request->validate([
+            'title' => 'required|string|max:100',
+            'body' => 'required|string|max:255',
+        ]);
+
+        // se establece una relación uno a muchos
+        $request->user()->posts()->create($validate);
+
+        // si todo esta bien se guardan los datos y se redirige a la vista establecida en el método index
+        return redirect(route('posts.index'));
     }
 
 
