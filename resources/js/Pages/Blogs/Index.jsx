@@ -14,6 +14,7 @@ const Index = ({auth}) => {
 
     const submit = (e) =>{
         e.preventDefault()
+        console.log(data)
         post(route('posts.store'), {onSuccess:()=> reset() })
     }
 
