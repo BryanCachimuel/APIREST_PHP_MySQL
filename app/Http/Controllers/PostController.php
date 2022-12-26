@@ -35,7 +35,16 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $validate = $request->validate([
+            'title' => 'required|string|max:100',
+            'body' => 'required|string|max:255',
+        ]);
+
+        $post->update($validate);
+
+        return redirect(route('posts.index'));
     }
 
 
