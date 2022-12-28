@@ -37,19 +37,21 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $validate = $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:100',
             'body' => 'required|string|max:255',
-        ]);
+         ]);
 
-        $post->update($validate);
+         $post->update($validated);
 
-        return redirect(route('posts.index'));
+         return redirect(route('posts.index'));
     }
 
 
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete',$post);
+        $post->delete();
+        return redirect(route('posts.index'));
     }
 }
