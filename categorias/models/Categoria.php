@@ -35,4 +35,17 @@
              return $resultado;
         }
 
+        public function update_categoria($cat_nombre, $cat_observacion, $cat_id) {
+             $conectar = parent::Conexion();
+             parent::set_names();
+             $sql = "UPDATE tm_categoria SET cat_nombre=?,cat_observacion=? where cat_id=?";
+             $sql = $conectar->prepare($sql);
+             $sql->bindValue(1, $cat_nombre);
+             $sql->bindValue(2, $cat_observacion);
+             $sql->bindValue(3, $cat_id);
+             $sql->execute();
+             $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+             return $resultado;
+        }
+
     }
