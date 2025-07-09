@@ -31,5 +31,9 @@
             echo json_encode("Registro Actualizado Correctamente");
             break;
         
+        case "Delete":
+            $datos = $categoria->delete_categoria($body["cat_id"]);
+            echo json_encode("REgistro Eliminado Correctamente");
+            break;
         
     }
