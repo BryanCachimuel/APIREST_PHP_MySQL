@@ -48,4 +48,16 @@
              return $resultado;
         }
 
+         public function delete_categoria($cat_id) {
+             $conectar = parent::Conexion();
+             parent::set_names();
+             $sql = "UPDATE tm_categoria SET cat_estado='0' where cat_id=?";
+             $sql = $conectar->prepare($sql);
+             $sql->bindValue(1, $cat_id);
+             $sql->execute();
+             $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+             return $resultado;
+        }
+
+
     }
