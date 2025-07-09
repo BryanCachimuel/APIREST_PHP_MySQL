@@ -25,6 +25,11 @@
             $datos = $categoria->insert_categoria($body["cat_nombre"], $body["cat_observacion"]);
             echo json_encode("Registro Correcto");
             break;
+
+        case "Update":
+            $datos = $categoria->update_categoria($body["cat_nombre"], $body["cat_observacion"], $body["cat_id"]);
+            echo json_encode("Registro Actualizado Correctamente");
+            break;
         
         
     }
