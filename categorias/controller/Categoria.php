@@ -20,6 +20,11 @@
             $datos = $categoria->get_categoria_por_id($body["cat_id"]);
             echo json_encode($datos);
             break;
+
+        case "Insert":
+            $datos = $categoria->insert_categoria($body["cat_nombre"], $body["cat_observacion"]);
+            echo json_encode("Registro Correcto");
+            break;
         
         
     }
