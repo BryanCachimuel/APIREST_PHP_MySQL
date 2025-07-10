@@ -17,7 +17,7 @@
         }
 
         public function create() {
-            $query = "INSERT INTO " . $this->table_name . "SET nombre=:nombre, descripcion=:descripcion, precio=:precio, creado_en=NOW()";
+            $query = "INSERT INTO " . $this->table_name . " SET nombre=:nombre, descripcion=:descripcion, precio=:precio";
             $stmt = $this->conn->prepare($query);
 
             // se limpian los atributos antes de ser ingresados
@@ -31,7 +31,7 @@
             $stmt->bindParam(":precio", $this->precio);
 
             // si todo esta correcto
-            if($stmt->execute()){
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
