@@ -37,4 +37,12 @@
             return false;
         }
 
+        public function read() {
+            $query = "SELECT id, nombre, descripcion, precio FROM " . $this->table_name;
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+
+            return $stmt;
+        }
+
     }
