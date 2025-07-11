@@ -69,7 +69,17 @@
         }
 
         public function delete() {
-            
+            $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            $stmt->bindParam(":id", $this->id);
+
+             // si todo esta correcto
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         }
 
     }
