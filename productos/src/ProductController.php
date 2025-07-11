@@ -44,7 +44,33 @@
         }
 
         public function read() {
-            
+            $stmt = $this->product->read();
+            $num = $stmt->rowCount();
+
+            if($num > 0) {
+                $product_array = [];
+                $product_array["registros"] = [];
+
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    extract($row);
+
+                    $product_item = [
+                        "id" => $id,
+                        "nombre" => $nombre,
+                        "descripcion" => $descripcion,
+                        "precio" => $precio
+                    ];
+
+                    array_push($product_array["registros"], $product_item);
+                }
+
+                http_response_code(200);
+                echo json_encode($product_array);
+            }
+            else {
+                http_response_code(400);
+                echo json_encode(["message" => "No se encontraron productos"]);
+            }
         }
 
         public function update() {
