@@ -39,8 +39,7 @@
                 // código de error con el cliente
                 http_response_code(400);
                 echo json_encode(["message" => "Datos incompletos para crear el producto"]);
-            }
-            
+            } 
         }
 
         public function read() {
@@ -74,7 +73,25 @@
         }
 
         public function update() {
-            
+            $data = json_decode(file_get_contents("php://input"));
+
+            if (!empty($data->nombre) && !empty($data->descripcion) && !empty($data->precio) && !empty($data->id)) {
+                $this->product->nombre = $data->nombre;
+                $this->product->descripcion = $data->descripcion;
+                $this->product->precio = $data->precio;
+                $this->product->id = $data->id;
+
+                if ($this->product->update()) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "Producto Actualziado con Exito"]);
+                } else {
+                    http_response_code(503);
+                    echo json_encode(["message" => "El Producto no se actualizo"]);
+                }
+            } else {
+                http_response_code(400);
+                echo json_encode(["message" => "Datos incompletos para actualizar el producto"]);
+            }
         }
 
         public function delete() {
