@@ -72,6 +72,10 @@
             }
         }
 
+        public function read_by_id() {
+            
+        }
+
         public function update() {
             $data = json_decode(file_get_contents("php://input"));
 
@@ -95,7 +99,23 @@
         }
 
         public function delete() {
-            
+            $data = json_decode(file_get_contents("php://input"));
+
+            if (!empty($data->id)) {
+                $this->product->id = $data->id;
+
+                if ($this->product->delete()) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "Producto Eliminado Exitosamente"]);
+                } else {
+                    http_response_code(503);
+                    echo json_encode(["message" => "El Producto no ha sido eliminado"]);
+                }
+            }
+            else {
+                http_response_code(400);
+                echo json_encode(["message" => "Datos incompletos para eliminar el producto"]);
+            }
         }
 
     }
