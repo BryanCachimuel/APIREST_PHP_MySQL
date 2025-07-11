@@ -45,4 +45,31 @@
             return $stmt;
         }
 
+        public function update() {
+            $query = "UPDATE " . $this->table_name . " SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+
+             // se limpian los atributos antes de ser ingresados
+            $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+            $this->descripcion = htmlspecialchars(strip_tags($this->descripcion));
+            $this->precio = htmlspecialchars(strip_tags($this->precio));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Parámetros que se quieren enviar para llenarlos de información
+            $stmt->bindParam(":nombre", $this->nombre);
+            $stmt->bindParam(":descripcion", $this->descripcion);
+            $stmt->bindParam(":precio", $this->precio);
+            $stmt->bindParam(":id", $this->id);
+
+            // si todo esta correcto
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }
+
+        public function delete() {
+            
+        }
+
     }
