@@ -45,6 +45,14 @@
             return $stmt;
         }
 
+        public function read_by_id() {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id LIMIT 1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            
+            return $stmt;
+        }
+
         public function update() {
             $query = "UPDATE " . $this->table_name . " SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE id = :id";
             $stmt = $this->conn->prepare($query);
