@@ -23,4 +23,23 @@
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
+        public function register() {
+            $query = "INSERT INTO " . $this->table_name . " SET nombre = :nombre, correo = :correo, contrasenia = :contrasenia ";
+            $stmt = $this->conn->prepare($query);
+
+            $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+            $this->correo = htmlspecialchars(strip_tags($this->correo));
+            $this->contrasenia = htmlspecialchars(strip_tags($this->contrasenia));
+
+            $stmt->bindParam(":nombre", $this->nombre);
+            $stmt->bindParam(":correo", $this->correo);
+            $stmt->bindParam(":contrasenia", $this->contrasenia);
+
+            if($stmt->execute()) {
+                return true;
+            }
+
+            return false;
+        }
     }
