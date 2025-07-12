@@ -48,9 +48,11 @@
         public function read_by_id() {
             $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id LIMIT 1";
             $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(":id", $this->id);
             $stmt->execute();
-            
-            return $stmt;
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         public function update() {
