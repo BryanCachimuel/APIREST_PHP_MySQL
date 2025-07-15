@@ -49,5 +49,16 @@
             http_response_code(400);
             echo json_encode(["message" => "Datos Incompletos"]);
          }
-       } 
+       }
+       
+       public function validateToken($token) {
+        try {
+            $decode = JWT::decode($token, new Key(JwtConfig::getKey(), "HS256"));
+            return $decode;
+        } catch (Exception $e) {
+            http_response_code(401);
+            echo json_encode(["message" => "Acceso no autorizado", "error" => $e->getMessage()]);
+            exit();
+        }
+       }
     }
