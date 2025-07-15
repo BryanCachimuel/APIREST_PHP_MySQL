@@ -30,7 +30,7 @@
 
             $this->nombre = htmlspecialchars(strip_tags($this->nombre));
             $this->correo = htmlspecialchars(strip_tags($this->correo));
-            $this->contrasenia = htmlspecialchars(strip_tags($this->contrasenia));
+            $this->contrasenia = password_hash($this->contrasenia, PASSWORD_BCRYPT);
 
             $stmt->bindParam(":nombre", $this->nombre);
             $stmt->bindParam(":correo", $this->correo);
