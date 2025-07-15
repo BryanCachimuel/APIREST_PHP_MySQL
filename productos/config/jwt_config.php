@@ -15,7 +15,7 @@
             return self::$issuer;
         }
 
-        public function getAudience()  {
+        public static function getAudience()  {
             return self::$audience;
         }
 
