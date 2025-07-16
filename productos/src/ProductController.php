@@ -72,9 +72,6 @@
             }
         }
 
-        public function read_by_id() {
-            
-        }
 
         public function update() {
             $data = json_decode(file_get_contents("php://input"));
