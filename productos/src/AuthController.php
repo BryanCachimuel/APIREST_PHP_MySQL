@@ -51,7 +51,7 @@
          }
        }
        
-       public function validateToken($token) {
+       public static function validateToken($token) {
         try {
             $decode = JWT::decode($token, new Key(JwtConfig::getKey(), "HS256"));
             return $decode;
