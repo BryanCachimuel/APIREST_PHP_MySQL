@@ -57,11 +57,21 @@ switch ($method) {
         break;
 
     case 'PUT':
-        $productController->update();
+        if($page == "/") {
+            $productController->update();
+        } else {
+            http_response_code(404);
+            echo json_encode(["message" => "Método no permitido"]);
+        }
         break;
 
     case 'DELETE':
-        $productController->delete();
+        if($page == "/") {
+            $productController->delete();
+        } else {
+            http_response_code(404);
+            echo json_encode(["message" => "Método no permitido"]);
+        }
         break;
 
     default:
