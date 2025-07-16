@@ -14,7 +14,7 @@
 
         public function __construct() {
             $database = new Database();
-            $this->db = $database;
+            $this->db = $database->getConnection();
             $this->user = new User($this->db);
         }
 
